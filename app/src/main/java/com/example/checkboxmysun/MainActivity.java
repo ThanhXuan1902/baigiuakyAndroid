@@ -24,43 +24,39 @@ public class MainActivity extends AppCompatActivity {
     String thoiQuen;
     GridLayout gridLayout;
     int count;
-    ArrayList<Integer> arrayNgay;
-    LinearLayout parent;
+    ArrayList<Integer> mangNgay;
+    LinearLayout layoutCha;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-//        Init
         btnAdd = findViewById(R.id.btn_add);
         txtInput = findViewById(R.id.txt_input);
         txtTenThoiQuen = findViewById(R.id.txt_tenthoiquen);
-        parent = findViewById(R.id.parent);
-
-//        gridLayout = findViewById(R.id.grid_layout);
-
+        layoutCha = findViewById(R.id.parent);
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 thoiQuen = txtInput.getText().toString();
                 count = 0;
                 txtTenThoiQuen.setText(thoiQuen + ":"+ " đã hoàn thành " +count+" ngày!");
-                initTable();
-                arrayNgay = new ArrayList<Integer>();
-
+                khoitaotextbox();
+                mangNgay = new ArrayList<Integer>();
             }
         });
     }
 
-    protected void initTable(){
+    protected void khoitaotextbox(){
+        //  Sửa text
         this.gridLayout = new GridLayout(this);
         gridLayout.setColumnCount(3);
-        parent.addView(gridLayout);
+        layoutCha.addView(gridLayout);
 
-
+        // Tạo 21 Checkbox
         for(int i=0; i<21;i++){
             CheckBox checkBox = new CheckBox(this);
+            checkBox.setPadding(30, 30, 30,30);
             gridLayout.addView(checkBox);
 
             int finalI = i;
@@ -68,9 +64,8 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     if(checkBox.isChecked()){
-                        arrayNgay.add(finalI);
-//                        int dayCount = arrayNgay.size();
-                        txtTenThoiQuen.setText(thoiQuen + " đã hoàn thành " + arrayNgay.size() +" ngày!");
+                        mangNgay.add(finalI);
+                        txtTenThoiQuen.setText(thoiQuen + " đã hoàn thành " + mangNgay.size() +" ngày!");
                     }
                 }
             });
